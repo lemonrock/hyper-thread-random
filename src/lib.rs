@@ -12,8 +12,8 @@
 #[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))] extern crate rand;
 
 
-#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))] use ::rand::Rng;
-#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))] use ::rand::thread_rng;
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrand")))] use ::rand::Rng;
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrand")))] use ::rand::thread_rng;
 
 
 include!("generate.rs");

@@ -3,7 +3,7 @@
 
 
 /// Generates a random u64 for the current hyper thread.
-#[cfg(all(target_arch = "x86", target_feature = "rdrnd"))]
+#[cfg(all(target_arch = "x86", target_feature = "rdrand"))]
 #[inline(always)]
 pub fn generate_hyper_thread_safe_random_u64() -> u64
 {
@@ -11,7 +11,7 @@ pub fn generate_hyper_thread_safe_random_u64() -> u64
 }
 
 /// Generates a random u64 for the current hyper thread.
-#[cfg(all(target_arch = "x86_64", target_feature = "rdrnd"))]
+#[cfg(all(target_arch = "x86_64", target_feature = "rdrand"))]
 #[inline(always)]
 pub fn generate_hyper_thread_safe_random_u64() -> u64
 {
@@ -19,7 +19,7 @@ pub fn generate_hyper_thread_safe_random_u64() -> u64
 }
 
 /// Generates a random u64 for the current hyper thread.
-#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))]
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrand")))]
 pub fn generate_hyper_thread_safe_random_u64() -> u64
 {
 	thread_rng().next_u64()

@@ -3,23 +3,23 @@
 
 
 /// Generates a random u32 for the current hyper thread.
-#[cfg(all(target_arch = "x86", target_feature = "rdrnd"))]
+#[cfg(all(target_arch = "x86", target_feature = "rdrand"))]
 #[inline(always)]
 pub fn generate_hyper_thread_safe_random_u32() -> u32
 {
-	generate!(u32, ::std::arch::x86::_rdrand64_step)
+	generate!(u32, ::std::arch::x86::_rdrand32_step)
 }
 
 /// Generates a random u32 for the current hyper thread.
-#[cfg(all(target_arch = "x86_64", target_feature = "rdrnd"))]
+#[cfg(all(target_arch = "x86_64", target_feature = "rdrand"))]
 #[inline(always)]
 pub fn generate_hyper_thread_safe_random_u32() -> u32
 {
-	generate!(u32, ::std::arch::x86_64::_rdrand64_step)
+	generate!(u32, ::std::arch::x86_64::_rdrand32_step)
 }
 
 /// Generates a random u32 for the current hyper thread.
-#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))]
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrand")))]
 pub fn generate_hyper_thread_safe_random_u32() -> u32
 {
 	thread_rng().next_u32()

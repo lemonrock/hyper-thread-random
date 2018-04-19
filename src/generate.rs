@@ -2,7 +2,7 @@
 // Copyright © 2017 The developers of hyper-thread-random. See the COPYRIGHT file in the top-level directory of this distribution and at https://raw.githubusercontent.com/lemonrock/hyper-thread-random/master/COPYRIGHT.
 
 
-#[cfg(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "avx2"))]
+#[cfg(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrand"))]
 macro_rules! generate
 {
 	($unsigned_integer: ty, $func: path) =>
@@ -16,7 +16,7 @@ macro_rules! generate
 				
 				loop
 				{
-					let success = ::std::arch::x86_64::_rdrand64_step(&mut random_value);
+					let success = $func(&mut random_value);
 					if success != 0
 					{
 						return random_value
