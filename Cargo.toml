@@ -25,5 +25,5 @@ lto = true
 debug-assertions = false
 codegen-units = 1
 
-[target.'cfg(not(all(target_feature = "rdrnd", any(target_arch = "x86", target_arch = "x86_64"))))'.dependencies]
+[target.'cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))'.dependencies]
 rand = "0.4"

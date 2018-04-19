@@ -3,15 +3,21 @@
 
 
 #![deny(missing_docs)]
-#![feature(cfg_target_feature)]
 
 
 //! #hyper-thread-random
 //! Provides hyper-thread local random number generators optimized for recent Intel x86-64 chips with the `RDRAND` instruction; falls back to rand crate for others.
 
 
-#[cfg(not(all(target_feature = "+rdrnd", any(target_arch = "x86", target_arch = "x86_64"))))] extern crate rand;
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))] extern crate rand;
 
 
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))] use ::rand::Rng;
+#[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))] use ::rand::thread_rng;
+
+
+include!("generate.rs");
+include!("generate_hyper_thread_safe_random_u16.rs");
+include!("generate_hyper_thread_safe_random_u32.rs");
 include!("generate_hyper_thread_safe_random_u64.rs");
 include!("generate_hyper_thread_safe_random_usize.rs");

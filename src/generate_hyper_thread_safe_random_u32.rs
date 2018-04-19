@@ -2,25 +2,25 @@
 // Copyright © 2018 The developers of hyper-thread-random. See the COPYRIGHT file in the top-level directory of this distribution and at https://raw.githubusercontent.com/lemonrock/hyper-thread-random/master/COPYRIGHT.
 
 
-/// Generates a random u64 for the current hyper thread.
+/// Generates a random u32 for the current hyper thread.
 #[cfg(all(target_arch = "x86", target_feature = "rdrnd"))]
 #[inline(always)]
-pub fn generate_hyper_thread_safe_random_u64() -> u64
+pub fn generate_hyper_thread_safe_random_u32() -> u32
 {
-	generate!(u64, ::std::arch::x86::_rdrand64_step)
+	generate!(u32, ::std::arch::x86::_rdrand64_step)
 }
 
-/// Generates a random u64 for the current hyper thread.
+/// Generates a random u32 for the current hyper thread.
 #[cfg(all(target_arch = "x86_64", target_feature = "rdrnd"))]
 #[inline(always)]
-pub fn generate_hyper_thread_safe_random_u64() -> u64
+pub fn generate_hyper_thread_safe_random_u32() -> u32
 {
-	generate!(u64, ::std::arch::x86_64::_rdrand64_step)
+	generate!(u32, ::std::arch::x86_64::_rdrand64_step)
 }
 
-/// Generates a random u64 for the current hyper thread.
+/// Generates a random u32 for the current hyper thread.
 #[cfg(not(all(any(target_arch = "x86", target_arch = "x86_64"), target_feature = "rdrnd")))]
-pub fn generate_hyper_thread_safe_random_u64() -> u64
+pub fn generate_hyper_thread_safe_random_u32() -> u32
 {
-	thread_rng().next_u64()
+	thread_rng().next_u32()
 }
